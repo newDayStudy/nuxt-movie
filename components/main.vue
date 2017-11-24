@@ -47,4 +47,16 @@
     width: 100%;
     height: 180px;
   }
+  @media screen and (max-width:750px){
+     .movie li{
+       width: 100%;
+       margin-right: 0;
+     }
+  }
+  @media screen and (min-width:750px) and (max-width:970px){
+     .movie li{
+       width: 45%;
+
+     }
+  }
 </style>
