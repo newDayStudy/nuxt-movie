@@ -2,7 +2,7 @@
   <section class="wrapper">
     <h3>{{title}}</h3>
     <ul class="movie">
-      <li v-for="item in comingsoon">
+      <li v-for="item in comingSoon">
         <a :href="item.share_url" target="_blank">
           <span class="pause"></span>
           <img :src="item.item_cover" alt="图片" class="avatar">
@@ -15,26 +15,47 @@
 <script>
   export default{
     scrollToTop: false,
-    props: ['comingsoon', 'title']
+    props: {
+      comingSoon: {
+        type: Array,
+        default: () => [],
+        validator(value) {
+          return Array.isArray(value) == true
+        }
+      },
+      title: String
+    }
   }
 </script>
 <style lang="scss" scoped="scoped">
+  h3{
+    margin:0;
+    position: sticky;
+    top: 0;
+    z-index: 11;
+    padding: 10px;
+    background-color: #fff;
+  }
   .movie{
     display: flex;
     flex-wrap: wrap;
-    justify-content: space-around;
+    justify-content: space-between;
     margin: 0;
-    padding: 0;
+    padding: 0 10px;
     list-style: none;
+  }
+  .movie::after{
+    content:"";
+    display: block;
+    width: 13%;
   }
   .movie li{
     position: relative;
     overflow: hidden;
     width: 13%;
-    margin-right: 30px;
     margin-bottom: 30px;
-    border-radius: 4px;
     background-color: #fafafa;
+    border-radius: 4px;
     a{
       display: block;
       padding-bottom: 4px;
