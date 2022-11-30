@@ -20,12 +20,12 @@
 </script>
 <style lang="scss" scoped="scoped">
   .movie{
-    list-style: none;
     display: flex;
     flex-wrap: wrap;
     justify-content: space-around;
     margin: 0;
     padding: 0;
+    list-style: none;
   }
   .movie li{
     position: relative;
@@ -81,5 +81,10 @@
       }
     }
   }
-  
+  @media screen and(max-width:750px){
+    .movie li{
+      width: calc((100% - 20px) / 2);
+      margin: 0 auto 20px;
+    }
+  }
 </style>
