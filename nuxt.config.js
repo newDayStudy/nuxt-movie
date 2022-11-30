@@ -31,12 +31,29 @@ module.exports = {
     */
     extend (config, ctx) {
       if (ctx.dev && ctx.isClient) {
-        config.module.rules.push({
-          enforce: 'pre',
-          test: /\.(js|vue)$/,
-          loader: 'eslint-loader',
-          exclude: /(node_modules)/
-        })
+        // config.module.rules.push({
+        //   enforce: 'pre',
+        //   test: /\.(js|vue)$/,
+        //   loader: 'eslint-loader',
+        //   exclude: /(node_modules)/
+        // })
+      }
+    }
+  },
+  modules: [
+    '@nuxtjs/axios',
+	  '@nuxtjs/proxy'
+  ],
+  axios:{
+    //是否开启跨域
+    proxy:true
+  },
+  proxy: {
+    '/api': {
+      target: 'http://apis.juhe.cn', // 目标接口域名    
+      changeOrigin: true, // 表示是否跨域
+      pathRewrite: {
+      '^/api': '', // 把 /api 替换成
       }
     }
   }

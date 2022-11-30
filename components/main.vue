@@ -3,10 +3,11 @@
     <h3>{{title}}</h3>
     <ul class="movie">
       <li v-for="item in comingsoon">
-        <img :src="item.images.small" alt="图片" class="avatar">
-        <div class="wordWrap">{{item.title}}</div>
-        <div>评分<span class="score">{{item.rating.average?item.rating.average+'分':'暂无'}}</span></div>
-        <div><i class="iconfont yellow">&#xe644;</i><span class="score">{{item.rating.stars == '00'?'暂无':item.rating.stars}}</span></div>
+        <a :href="item.share_url" target="_blank">
+          <span class="pause"></span>
+          <img :src="item.item_cover" alt="图片" class="avatar">
+          <span class="wordWrap">{{item.title}}</span>
+        </a>
       </li>
     </ul>
   </section>
@@ -17,7 +18,7 @@
     props: ['comingsoon', 'title']
   }
 </script>
-<style lang="css" scoped="scoped">
+<style lang="scss" scoped="scoped">
   .movie{
     list-style: none;
     display: flex;
@@ -27,24 +28,58 @@
     padding: 0;
   }
   .movie li{
+    position: relative;
+    overflow: hidden;
     width: 13%;
-    border: 1px solid #ddd;
-    padding: 10px;
     margin-right: 30px;
-    margin-bottom: 10px;
+    margin-bottom: 30px;
+    border-radius: 4px;
+    background-color: #fafafa;
+    a{
+      display: block;
+      padding-bottom: 4px;
+      .wordWrap{
+        max-width: 120px;
+        padding: 0 6px;
+        overflow: hidden;
+        text-overflow: ellipsis;
+        display: -webkit-box;
+        -webkit-line-clamp: 2;
+        -webkit-box-orient: vertical;
+      }
+      .avatar{
+        width: 100%;
+        height: 180px;
+        margin-bottom: 4px;
+        vertical-align: middle;
+      }
+      .pause{
+        position: absolute;
+        left: 0;
+        right: 0;
+        margin: auto;
+        width: 50px;
+        height: 50px;
+        transform: translateY(65px);
+        background-color: rgba($color: #000000, $alpha: .6);
+        border-radius: 100%;
+        &:before{
+          content:"";
+          position: absolute;
+          top: 0;
+          left: 0;
+          right: 0;
+          bottom: 0;
+          margin: auto;
+          width: 0;
+          height: 0;
+          transform: translateX(-3px);
+          border-right: 15px solid #fafafa;
+          border-bottom: 15px solid transparent;
+          border-top: 15px solid transparent;
+        }
+      }
+    }
   }
-  .yellow{
-    color: yellow
-  }
-  .score{
-    color: red;
-    float: right;
-  }
-  .wordWrap{
-    max-width: 120px
-  }
-  .avatar{
-    width: 100%;
-    height: 180px;
-  }
+  
 </style>
